@@ -1,0 +1,134 @@
+{
+    "swagger": "2.0",
+    "info": {
+      "description": "class code activity\n",
+      "version": "1.0.0",
+      "title": "Class activity"
+    },
+    "host": "virtserver.swaggerhub.com",
+    "basePath": "/SOL21002_1/cse341-week5/1.0.0",
+    "tags": [
+      {
+        "name": "user",
+        "description": "operation about user"
+      },
+      {
+        "name": "developers",
+        "description": "Operations available to regular developers"
+      }
+    ],
+    "schemes": [
+      "https"
+    ],
+    "paths": {
+      "/user": {
+        "get": {
+          "tags": [
+            "user"
+          ],
+          "summary": "Calls name api",
+          "description": "By passing in the appropriate options, you can search for\navailable inventory in the system\n",
+          "operationId": "reverse",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "name": "name",
+              "in": "query",
+              "description": "the name of reverse",
+              "required": true,
+              "type": "string"
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "successful operation",
+              "schema": {
+                "$ref": "#/definitions/ReversedResponse"
+              }
+            },
+            "400": {
+              "description": "bad input parameter"
+            }
+          }
+        },
+        "post": {
+          "tags": [
+            "admins"
+          ],
+          "summary": "adds an user item",
+          "description": "Adds an user to the system",
+          "operationId": "addUser",
+          "consumes": [
+            "application/json"
+          ],
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "body",
+              "name": "userItem",
+              "description": "User item to add",
+              "required": false,
+              "schema": {
+                "$ref": "#/definitions/User"
+              }
+            }
+          ],
+          "responses": {
+            "201": {
+              "description": "item created"
+            },
+            "400": {
+              "description": "invalid parameters supplied"
+            }
+          }
+        }
+      }
+    },
+    "definitions": {
+      "User": {
+        "type": "object",
+        "required": [
+          "id",
+          "manufacturer",
+          "name",
+          "releaseDate"
+        ],
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "name": {
+            "type": "string",
+            "example": "Widget Adapter"
+          },
+          "releaseDate": {
+            "type": "string",
+            "format": "date-time",
+            "example": "2016-08-29T09:12:33.001Z"
+          },
+          "manufacturer": {
+            "$ref": "#/definitions/ReversedResponse"
+          }
+        }
+      },
+      "ReversedResponse": {
+        "required": [
+          "name"
+        ],
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "homePage": {
+            "type": "string",
+            "format": "url"
+          }
+        }
+      }
+    }
+  }
